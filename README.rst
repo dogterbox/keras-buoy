@@ -30,8 +30,7 @@ Example
     >>> model = keras.Sequential()
     ...
     >>> resumable_model = ResumableModel(model, 
-                                         save_every_epochs=4, 
-                                         custom_objects=None, 
+                                         n_save_freq=4,
                                          to_path='/path/to/save/model_weights.h5')
     >>> history = resumable_model.fit(x=x_train, 
                                       y=y_train,
@@ -68,7 +67,7 @@ Creates a resumable model.
 +===================================+=================================================================================================================================================================================+
 | :code:`model (tf.keras.Model)`    | The instance of :code:`tf.keras.Model` which you want to make resumable.                                                                                                        |
 +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| :code:`save_every_epochs (int)`   | Specifies how often to save the model, history, and epoch counter.  In case of a crash, recovery will happen from the last saved epoch multiple.                                |
+| :code:`n_save_freq (int)`   | Specifies how often to save the model, history, and epoch counter.  In case of a crash, recovery will happen from the last saved epoch multiple.                                |
 +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :code:`custom_objects (dict)`     | At recovery time, this is passed into :code:`tf.keras.models.load_model(...)` exactly as shown in Tensorflow docs so you can load your model with a custom loss for example.    |
 +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

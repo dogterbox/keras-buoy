@@ -1,27 +1,26 @@
-from tensorflow import keras 
+from .utils import merge_dicts_with_only_lists_as_values
+from tensorflow import keras
 import pickle
 
-from .utils import merge_dicts_with_only_lists_as_values
 
 class EpochCounter(keras.callbacks.Callback):
-  def __init__(self, period, counter_path):
-    self.period = period
+  def __init__(self, counter_path):
     self.counter_path = counter_path
-    self.clock = 0
     super(EpochCounter, self).__init__()
+
   def on_epoch_begin(self, epoch, logs=None):
     # save epoch number to disk
-    self.clock += 1
-    if self.clock % self.period == 1 or self.period == 1:
-      pickle.dump(epoch, open(self.counter_path, "wb"))
+    pickle.dump(epoch, open(self.counter_path, "wb"))
+
 
 class HistoryLogger(keras.callbacks.Callback):
   def __init__(self, period, history_path, recovered_history):
     self.period = period
-    self.recovered_history = recovered_history 
+    self.recovered_history = recovered_history
     self.history_path = history_path
     self.clock = 0
     super(HistoryLogger, self).__init__()
+
   def on_epoch_begin(self, epoch, logs=None):
     self.clock += 1
     if self.clock % self.period == 1 or self.period == 1:
