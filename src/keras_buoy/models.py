@@ -30,7 +30,6 @@ class ModelTrainer(object):
 
     self.model = model
     self.period = period
-    self.custom_objects = custom_objects
     self.to_path = to_path
     self.prefix = os.path.splitext(to_path)[0]
     self.checkpoint_file = self.prefix + "model.hdf5"
@@ -80,7 +79,7 @@ class ModelTrainer(object):
       # get batch size
       if 'validation_batch_size' in kwargs:
         batch_size = kwargs['validation_batch_size']
-      elif:
+      elif 'batch_size' in kwargs:
         batch_size = kwargs['batch_size']
       else:
         batch_size = None
